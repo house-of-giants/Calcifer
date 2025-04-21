@@ -4,8 +4,7 @@ A flexible WordPress calculator plugin that allows users to create custom formul
 
 [![Get it on Gumroad](https://img.shields.io/badge/Get%20it%20on-Gumroad-ff69b4)](https://houseofgiants.gumroad.com/l/calcifer)
 
-![Calcifer Calculator Block](admin/images/block-usage-6.png)
-
+![Calcifer Calculator Block](admin/images/calcifer.jpg)
 ## Description
 
 Calcifer is a versatile tool that enables website owners to create customized calculators with their own formulas. Whether you're calculating BMI, percentages, tip amounts, or any other mathematical formula, this plugin makes it easy to implement and display interactive calculators on your WordPress site.

@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Calcifer
- * Plugin URI: https://hlpipe.com
+ * Plugin URI: https://github.com/house-of-giants/Calcifer
  * Description: A flexible calculator plugin that allows users to create custom formulas and display them as Gutenberg blocks.
  * Version: 1.0.0
- * Author: H&L Pipe
- * Author URI: https://hlpipe.com
+ * Author: House of Giants
+ * Author URI: https://houseofgiants.com
  * Text Domain: calcifer
  * License: GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -13,7 +13,7 @@
 
 // If this file is called directly, abort.
 if (!defined('WPINC')) {
-	die;
+  die;
 }
 
 // Define plugin constants
@@ -27,7 +27,7 @@ require_once CALCIFER_PATH . 'includes/class-calcifer.php';
 // Initialize the plugin
 function run_calcifer()
 {
-	$plugin = new Calcifer();
-	$plugin->run();
+  $plugin = new Calcifer();
+  $plugin->run();
 }
 run_calcifer();

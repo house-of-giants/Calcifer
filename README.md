@@ -22,6 +22,12 @@ Calcifer is a versatile tool that enables website owners to create customized ca
 - Clean, modern interface
 - Developer-friendly architecture
 
+## Distribution Note
+
+We've made a conscious decision to distribute Calcifer exclusively through Gumroad rather than through the WordPress Plugin Directory. This decision reflects our desire to maintain full control over our plugin's development and distribution channels in light of recent changes to WordPress's plugin ecosystem and leadership direction. 
+
+We believe this approach allows us to better serve our users while maintaining our independence as developers.
+
 ## Installation
 
 1. Upload the `calcifer` folder to the `/wp-content/plugins/` directory

@@ -7,6 +7,10 @@
  * @var string $description The calculator description
  * @var string $theme The calculator theme
  */
+
+// Get settings to check if branding should be displayed
+$settings = get_option('calcifer_settings', array());
+$show_branding = isset($settings['show_branding']) ? (bool) $settings['show_branding'] : true;
 ?>
 <div class="calcifer-container <?php echo esc_attr("theme-{$theme}"); ?>"
 	data-formula-id="<?php echo esc_attr($formula['id']); ?>">
@@ -72,12 +76,14 @@
 		</div>
 	</div>
 
-	<div class="calcifer-footer">
-		<div class="calcifer-branding">
-			<span>Powered by</span>
-			<a href="https://houseofgiants.com" target="_blank" rel="noopener noreferrer">House of Giants</a>
+	<?php if ($show_branding): ?>
+		<div class="calcifer-footer">
+			<div class="calcifer-branding">
+				<span>Powered by</span>
+				<a href="https://houseofgiants.com" target="_blank" rel="noopener noreferrer">House of Giants</a>
+			</div>
 		</div>
-	</div>
+	<?php endif; ?>
 
 	<!-- Initial loading overlay will be inserted here by JavaScript -->
 </div>

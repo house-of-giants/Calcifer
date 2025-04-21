@@ -41,7 +41,7 @@ Calcifer is a versatile tool that enables website owners to create customized ca
 5. Configure the output settings
 6. Save your formula
 
-![Formula Creation](admin/images/block-usage-2.png)
+![Formula Creation](admin/images/block-usage-6.png)
 
 ### Adding a Calculator to a Page
 
@@ -53,7 +53,8 @@ Calcifer is a versatile tool that enables website owners to create customized ca
 6. Save the page
 
 ![Adding Calculator Block](admin/images/block-usage-1.png)
-![Configuring Calculator Block](admin/images/block-usage-3.png)
+![Configuring Calculator Block](admin/images/block-usage-2.png)
+![Calculator Preview](admin/images/block-usage-3.png)
 
 ## Default Calculators
 
@@ -129,7 +130,7 @@ The plugin will automatically:
 - Use text colors for text elements
 - Use background colors for light theme backgrounds
 
-![Theme Integration](admin/images/block-usage-5.png)
+![Theme Integration](admin/images/block-usage-7.png)
 
 ### Customizing Calculators
 
@@ -223,8 +224,8 @@ This plugin is licensed under the GPL v2 or later.
 
 ## Credits
 
-Developed by House of Giants.
+Developed by [House of Giants](https://houseofgiants.com).
 
 ## Support
 
-For help or feature requests, please visit [House of Giants](https://github.com/house-of-giants/Calcifer/issues).
+For help or feature requests: [GitHub Issues](https://github.com/house-of-giants/Calcifer/issues).

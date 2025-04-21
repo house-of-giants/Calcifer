@@ -2,6 +2,10 @@
 
 A flexible WordPress calculator plugin that allows users to create custom formulas and display them as Gutenberg blocks.
 
+[![Get it on Gumroad](https://img.shields.io/badge/Get%20it%20on-Gumroad-ff69b4)](https://giantdom.gumroad.com/l/calcifer)
+
+![Calcifer Calculator Block](admin/images/block-usage-6.png)
+
 ## Description
 
 Calcifer is a versatile tool that enables website owners to create customized calculators with their own formulas. Whether you're calculating BMI, percentages, tip amounts, or any other mathematical formula, this plugin makes it easy to implement and display interactive calculators on your WordPress site.
@@ -13,8 +17,10 @@ Calcifer is a versatile tool that enables website owners to create customized ca
 - Create multiple input fields with validation
 - Customize the appearance with light and dark themes
 - Add calculators anywhere using Gutenberg blocks
+- Automatic theme color integration with block themes
 - Responsive design for all devices
 - Clean, modern interface
+- Developer-friendly architecture
 
 ## Installation
 
@@ -35,6 +41,8 @@ Calcifer is a versatile tool that enables website owners to create customized ca
 5. Configure the output settings
 6. Save your formula
 
+![Formula Creation](admin/images/block-usage-2.png)
+
 ### Adding a Calculator to a Page
 
 1. Edit the page where you want to display the calculator
@@ -43,6 +51,9 @@ Calcifer is a versatile tool that enables website owners to create customized ca
 4. Choose your formula from the block settings
 5. Customize the title, description, and theme
 6. Save the page
+
+![Adding Calculator Block](admin/images/block-usage-1.png)
+![Configuring Calculator Block](admin/images/block-usage-3.png)
 
 ## Default Calculators
 
@@ -81,7 +92,11 @@ Where:
 - BillAmount = Total bill amount
 - TipPercentage = Percentage you want to tip
 
-## Building from Source
+![Calculator Example](admin/images/block-usage-4.png)
+
+## Developer Guide
+
+### Building from Source
 
 For developers who want to modify the plugin:
 
@@ -89,6 +104,118 @@ For developers who want to modify the plugin:
 2. Run `npm install` to install dependencies
 3. Run `npm run start` for development
 4. Run `npm run build` for production build
+
+### Theme Integration
+
+Calcifer automatically detects and uses colors from your WordPress block theme:
+
+```php
+// Example of how Calcifer detects theme colors:
+if (function_exists('wp_get_global_settings')) {
+  $settings = wp_get_global_settings();
+  
+  if (!empty($settings['color']['palette'])) {
+    foreach ($settings['color']['palette'] as $color) {
+      // Look for primary, secondary, text, and background colors
+      // in the theme's color palette
+    }
+  }
+}
+```
+
+The plugin will automatically:
+- Use primary colors for buttons and highlights
+- Use secondary colors for dark theme backgrounds
+- Use text colors for text elements
+- Use background colors for light theme backgrounds
+
+![Theme Integration](admin/images/block-usage-5.png)
+
+### Customizing Calculators
+
+You can extend Calcifer with custom CSS or by hooking into our filters:
+
+#### CSS Customization
+
+Target specific calculator elements:
+
+```css
+/* Example: Customize the calculator buttons */
+.calcifer-button.calculate-button {
+  background-color: #ff6b6b;
+  border-radius: 0;
+}
+
+/* Style the result area */
+.calcifer-result {
+  background-color: #f9f9f9;
+  border-left: 8px solid #4ecdc4;
+}
+```
+
+#### PHP Filters
+
+```php
+// Example: Modify formula result before display
+add_filter('calcifer_formula_result', function($result, $formula_id, $inputs) {
+  // Perform custom calculations or formatting
+  return $result;
+}, 10, 3);
+
+// Example: Add custom fields to the calculator
+add_filter('calcifer_formula_inputs', function($inputs, $formula_id) {
+  // Add or modify input fields
+  return $inputs;
+}, 10, 2);
+```
+
+### REST API
+
+Calcifer provides REST API endpoints for calculator operations:
+
+```
+GET /wp-json/calcifer/v1/formulas 
+```
+Returns all available formula data.
+
+```
+POST /wp-json/calcifer/v1/calculate/{id}
+```
+Calculate a formula with the provided inputs.
+
+Example usage:
+
+```javascript
+// Example: Calculate a formula via the REST API
+fetch('/wp-json/calcifer/v1/calculate/123', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-WP-Nonce': wpApiSettings.nonce
+  },
+  body: JSON.stringify({
+    Weight: 70,
+    Height: 1.75
+  })
+})
+.then(response => response.json())
+.then(data => console.log(data.result));
+```
+
+## Support Calcifer
+
+If you find Calcifer useful, please consider supporting its development through our "pay what you want" model.
+
+[![Support on Gumroad](https://img.shields.io/badge/Support%20on-Gumroad-ff69b4)](https://giantdom.gumroad.com/l/calcifer)
+
+Your support helps with:
+- Ongoing development
+- Bug fixes
+- New features
+- Documentation updates
+- Plugin maintenance
+
+Any contribution is appreciated and helps keep the project going!
 
 ## License
 
@@ -100,4 +227,4 @@ Developed by House of Giants.
 
 ## Support
 
-For support or feature requests, please visit [House of Giants](https://houseofgiants.com).
+For help or feature requests, please visit [House of Giants](https://github.com/house-of-giants/Calcifer/issues).

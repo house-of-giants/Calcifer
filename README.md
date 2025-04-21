@@ -2,7 +2,7 @@
 
 A flexible WordPress calculator plugin that allows users to create custom formulas and display them as Gutenberg blocks.
 
-[![Get it on Gumroad](https://img.shields.io/badge/Get%20it%20on-Gumroad-ff69b4)](https://giantdom.gumroad.com/l/calcifer)
+[![Get it on Gumroad](https://img.shields.io/badge/Get%20it%20on-Gumroad-ff69b4)](https://houseofgiants.gumroad.com/l/calcifer)
 
 ![Calcifer Calculator Block](admin/images/block-usage-6.png)
 
@@ -213,7 +213,7 @@ fetch('/wp-json/calcifer/v1/calculate/123', {
 
 If you find Calcifer useful, please consider supporting its development through our "pay what you want" model.
 
-[![Support on Gumroad](https://img.shields.io/badge/Support%20on-Gumroad-ff69b4)](https://giantdom.gumroad.com/l/calcifer)
+[![Support on Gumroad](https://img.shields.io/badge/Support%20on-Gumroad-ff69b4)](https://houseofgiants.gumroad.com/l/calcifer)
 
 Your support helps with:
 - Ongoing development

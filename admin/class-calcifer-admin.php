@@ -119,7 +119,7 @@ class Calcifer_Admin
       $footer_text = sprintf(
         'If you enjoy using %1$s, please consider %2$s. Any support is appreciated!',
         '<strong>Calcifer</strong>',
-        '<a href="https://giantdom.gumroad.com/l/calcifer" target="_blank">supporting its development</a>'
+        '<a href="https://houseofgiants.gumroad.com/l/calcifer" target="_blank">supporting its development</a>'
       );
     }
 

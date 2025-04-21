@@ -11,19 +11,13 @@
 		const inputsContainer = $('#calcifer-inputs-container');
 		const template = $('#calcifer-input-template').html();
 
-		console.log('Setting up formula inputs');
-		console.log('Inputs container found:', inputsContainer.length > 0);
-		console.log('Template found:', template !== undefined);
-
 		// Add new input
 		$('.calcifer-add-input').on('click', function (e) {
 			e.preventDefault();
-			console.log('Add input button clicked');
 
 			// Count existing inputs
 			const count = inputsContainer.find('.calcifer-input-item').length;
 			const index = count;
-			console.log('Current input count:', count);
 
 			// Add new input
 			let newInput = template
@@ -31,15 +25,10 @@
 				.replace(/{number}/g, index + 1);
 
 			inputsContainer.append(newInput);
-			console.log('New input added');
 		});
-
-		// Log if add input button exists
-		console.log('Add input button found:', $('.calcifer-add-input').length > 0);
 
 		// Remove input
 		$(document).on('click', '.calcifer-remove-input', function () {
-			console.log('Remove input button clicked');
 			$(this).closest('.calcifer-input-item').remove();
 
 			// Update indices
@@ -48,7 +37,6 @@
 
 		// Add at least one input if there are none
 		if (inputsContainer.find('.calcifer-input-item').length === 0) {
-			console.log('No inputs found, adding one automatically');
 			$('.calcifer-add-input').trigger('click');
 		}
 	}
@@ -108,7 +96,9 @@
 
 			const formulaId = $(this).data('formula-id');
 			const modal = $('#calcifer-formula-preview-modal');
-			const modalContent = modal.find('.calcifer-formula-preview-content');
+			const modalContent = modal.find(
+				'.calcifer-formula-preview-content',
+			);
 
 			// Show modal
 			modal.show();
@@ -169,14 +159,12 @@
 
 	// Initialize when document is ready
 	$(document).ready(function () {
-		console.log('Document ready');
 		setupFormulaInputs();
 		setupFormulaPreview();
 	});
 
 	// Also try with window.onload to ensure all resources are loaded
 	$(window).on('load', function () {
-		console.log('Window loaded');
 		setupFormulaInputs();
 	});
 })(jQuery);

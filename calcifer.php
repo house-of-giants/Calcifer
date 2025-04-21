@@ -13,7 +13,7 @@
 
 // If this file is called directly, abort.
 if (!defined('WPINC')) {
-  die;
+	die;
 }
 
 // Define plugin constants
@@ -27,7 +27,7 @@ require_once CALCIFER_PATH . 'includes/class-calcifer.php';
 // Initialize the plugin
 function run_calcifer()
 {
-  $plugin = new Calcifer();
-  $plugin->run();
+	$plugin = new Calcifer();
+	$plugin->run();
 }
 run_calcifer();

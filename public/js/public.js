@@ -16,36 +16,22 @@
 		const formulaId = container.data('formula-id');
 		const form = container.find('.calcifer-form');
 		const result = container.find('.calcifer-result');
+		const resultNumber = result.find('.result-number');
 		const error = container.find('.calcifer-error');
-		const loading = container.find('.calcifer-loading');
 		
-		// Initially show loading to indicate initialization
-		loading.show();
+		// Set initial placeholder state
+		setPlaceholderState(resultNumber);
 		
-		// Hide loading when page is fully loaded
-		$(window).on('load', function() {
-			loading.fadeOut(300);
-			container.find('.calcifer-container-loader').fadeOut(300, function() {
-				$(this).remove();
-			});
-		});
-		
-		// In case window.load event doesn't fire, hide after timeout
-		setTimeout(function() {
-			loading.fadeOut(300);
-			container.find('.calcifer-container-loader').fadeOut(300, function() {
-				$(this).remove();
-			});
-		}, 1500);
+		// Remove any loading indicators
+		container.find('.calcifer-loading, .calcifer-container-loader').remove();
 		
 		// Submit form
 		form.on('submit', function(e) {
 			e.preventDefault();
 			
-			// Hide result and error, show loading
-			result.hide();
+			// Hide error, set calculating state
 			error.hide();
-			loading.fadeIn(300);
+			setCalculatingState(resultNumber);
 			
 			// Collect input values
 			const inputValues = {};
@@ -59,15 +45,14 @@
 			});
 			
 			// Calculate
-			calculateFormula(formulaId, inputValues, result, error, loading);
+			calculateFormula(formulaId, inputValues, resultNumber, error);
 		});
 		
 		// Reset form
 		form.find('.reset-button').on('click', function() {
-			// Hide result, error, and loading
-			result.hide();
+			// Hide error and reset result to placeholder
 			error.hide();
-			loading.hide();
+			setPlaceholderState(resultNumber);
 			
 			// Reset inputs to default values
 			form.find('input').each(function() {
@@ -84,8 +69,20 @@
 		});
 	}
 	
+	// Set placeholder state
+	function setPlaceholderState(resultElement) {
+		resultElement.text('—');
+		resultElement.addClass('result-placeholder');
+	}
+	
+	// Set calculating state
+	function setCalculatingState(resultElement) {
+		resultElement.text('Calculating...');
+		resultElement.addClass('result-calculating');
+	}
+	
 	// Calculate formula
-	function calculateFormula(formulaId, inputValues, resultContainer, errorContainer, loadingContainer) {
+	function calculateFormula(formulaId, inputValues, resultElement, errorContainer) {
 		// Modern fetch API request
 		fetch(calciferPublic.restUrl + 'calcifer/v1/calculate/' + formulaId, {
 			method: 'POST',
@@ -103,35 +100,22 @@
 			return response.json();
 		})
 		.then(response => {
-			// Hide loading
-			loadingContainer.fadeOut(300);
-			
 			if (response.success) {
-				// Update result
-				resultContainer.find('.result-number').text(response.formatted_result);
+				// Update result and remove placeholder/calculating classes
+				resultElement.removeClass('result-placeholder result-calculating');
+				resultElement.text(response.formatted_result);
 				
 				// Animate number effect
-				animateResult(resultContainer.find('.result-number'));
-				
-				// Show result
-				resultContainer.fadeIn(300);
-				
-				// Smooth scroll to result if needed
-				if (resultContainer.offset().top + resultContainer.height() > $(window).scrollTop() + $(window).height()) {
-					$('html, body').animate({
-						scrollTop: resultContainer.offset().top - 100
-					}, 500);
-				}
+				animateResult(resultElement);
 			} else {
-				// Show error
+				// Show error, set placeholder state
+				setPlaceholderState(resultElement);
 				errorContainer.text(response.message).fadeIn(300);
 			}
 		})
 		.catch(error => {
-			// Hide loading
-			loadingContainer.fadeOut(300);
-			
-			// Show error
+			// Show error, set placeholder state
+			setPlaceholderState(resultElement);
 			errorContainer.text('An error occurred. Please try again.').fadeIn(300);
 			console.error('Calculation error:', error);
 		});

@@ -1,0 +1,15 @@
+/**
+ * Frontend styles for the calculator block
+ * Note: Most styling is handled by the public.css file
+ */
+
+.wp-block-anything-calculator-calculator {
+	// Block-specific styles for Gutenberg
+	&.alignwide {
+		max-width: 1200px;
+	}
+
+	&.alignfull {
+		max-width: 100%;
+	}
+}

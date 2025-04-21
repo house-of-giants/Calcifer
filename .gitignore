@@ -1,0 +1,65 @@
+# Dependencies
+node_modules/
+vendor/
+bower_components/
+
+# Build process
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+.DS_Store
+
+# Testing and CI
+.phpunit.result.cache
+phpunit.xml
+backstop_data/
+tests/coverage/
+
+# Environment
+.env
+.env.*
+!.env.example
+.wp-env.json
+
+# Development
+.idea/
+.vscode/
+*.code-workspace
+.editorconfig
+.eslintignore
+.eslintrc
+.stylelintrc
+todo.txt
+TODO.md
+
+# Editors
+*.esproj
+*.tmproj
+*.tmproject
+tmtags
+.*.sw[a-z]
+*.un~
+Session.vim
+*.swp
+
+# OS files
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+Desktop.ini
+
+# Do NOT ignore dist directory - it's needed for the plugin to work
+# dist/  - commenting this out as it should be included
+
+# Build artifacts that should be committed for WordPress plugins
+# Examples of files to keep:
+# build/
+# assets/js/
+# assets/css/
+
+# Release archives
+release/
+*.zip
+*.tar.gz

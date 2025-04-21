@@ -1,0 +1,44 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "anything-calculator/calculator",
+	"version": "1.0.0",
+	"title": "Calculator",
+	"category": "widgets",
+	"icon": "calculator",
+	"description": "Add a formula calculator to your page.",
+	"example": {
+		"attributes": {
+			"formulaId": 0,
+			"title": "Calculator",
+			"description": "Enter values below to calculate the result.",
+			"theme": "light"
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"]
+	},
+	"attributes": {
+		"formulaId": {
+			"type": "number",
+			"default": 0
+		},
+		"title": {
+			"type": "string",
+			"default": "Calculator"
+		},
+		"description": {
+			"type": "string",
+			"default": ""
+		},
+		"theme": {
+			"type": "string",
+			"default": "light"
+		}
+	},
+	"textdomain": "anything-calculator",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

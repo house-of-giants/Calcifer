@@ -1,0 +1,13 @@
+{
+	"singleQuote": true,
+	"trailingComma": "all",
+	"useTabs": true,
+	"overrides": [
+		{
+			"files": ["**/*.css", "**/*.postcss", "**/*.scss", "**/*.html"],
+			"options": {
+				"singleQuote": false
+			}
+		}
+	]
+}

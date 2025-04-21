@@ -1,0 +1,130 @@
+/**
+ * Admin CSS for Anything Calculator
+ */
+
+/* Admin Cards */
+.anything-calculator-admin .card {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+  margin-top: 20px;
+  max-width: 100%;
+  padding: 20px;
+}
+
+.anything-calculator-admin .card h2 {
+  border-bottom: 1px solid #eeeeee;
+  margin-top: 0;
+  padding-bottom: 12px;
+}
+
+/* Formula Meta Boxes */
+.ac-formula-details,
+.ac-formula-output {
+  margin-bottom: 15px;
+}
+
+.ac-formula-details .description,
+.ac-formula-output .description {
+  color: #666666;
+  display: block;
+  margin: 5px 0 0 0;
+}
+
+/* Formula Inputs */
+.ac-input-item {
+  background: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+.ac-input-item h4 {
+  align-items: center;
+  border-bottom: 1px solid #eeeeee;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0;
+  padding-bottom: 10px;
+}
+
+.ac-remove-input {
+  color: #aa0000;
+  cursor: pointer;
+}
+
+.ac-remove-input:hover {
+  color: #dc3232;
+}
+
+.ac-actions {
+  margin-top: 20px;
+}
+
+/* Preview Modal */
+#ac-formula-preview-modal {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 100000;
+}
+
+.ac-formula-preview-container {
+  background: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  max-height: 90vh;
+  max-width: 800px;
+  overflow-y: auto;
+  padding: 20px;
+  width: 90%;
+}
+
+.ac-formula-preview-container h2 {
+  border-bottom: 1px solid #eeeeee;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0;
+  padding-bottom: 15px;
+}
+
+.ac-formula-preview-close {
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+}
+
+/* Settings Page */
+.anything-calculator-settings .card {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+  margin-top: 20px;
+  max-width: 100%;
+  padding: 20px;
+}
+
+.anything-calculator-settings .card h2 {
+  border-bottom: 1px solid #eeeeee;
+  margin-top: 0;
+  padding-bottom: 12px;
+}
+
+/* Responsive Tables */
+@media screen and (max-width: 782px) {
+  .anything-calculator-admin .wp-list-table {
+    table-layout: auto;
+  }
+  
+  .anything-calculator-admin .wp-list-table td,
+  .anything-calculator-admin .wp-list-table th {
+    display: table-cell;
+  }
+} 

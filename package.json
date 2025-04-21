@@ -1,0 +1,43 @@
+{
+	"name": "anything-calculator",
+	"version": "1.0.0",
+	"description": "A flexible calculator plugin for WordPress",
+	"main": "build/index.js",
+	"scripts": {
+		"build": "wp-scripts build && npm run copy-block-files",
+		"start": "wp-scripts start && npm run copy-block-files",
+		"format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss}\" --config .prettierrc.json",
+		"lint:js": "eslint \"src/**/*.js\" --config .eslintrc.js",
+		"lint:css": "stylelint \"src/**/*.scss\" --config .stylelintrc.json",
+		"lint": "npm run lint:js && npm run lint:css",
+		"fix:js": "eslint \"src/**/*.js\" --config .eslintrc.js --fix",
+		"fix:css": "stylelint \"src/**/*.scss\" --config .stylelintrc.json --fix",
+		"fix": "npm run format && npm run fix:css",
+		"copy-block-files": "mkdir -p build/blocks/calculator && cp src/blocks/calculator/block.json build/blocks/calculator/"
+	},
+	"author": "House of Giants",
+	"license": "GPL-2.0-or-later",
+	"dependencies": {
+		"@wordpress/block-editor": "^14.17.0",
+		"@wordpress/blocks": "^14.11.0",
+		"@wordpress/components": "^29.8.0",
+		"@wordpress/element": "^6.22.0",
+		"@wordpress/i18n": "^5.22.0",
+		"@wordpress/server-side-render": "^5.22.0"
+	},
+	"devDependencies": {
+		"@babel/eslint-parser": "^7.27.0",
+		"@babel/preset-react": "^7.26.3",
+		"@wordpress/scripts": "^30.15.0",
+		"eslint": "^8.57.1",
+		"eslint-config-prettier": "^10.1.2",
+		"eslint-plugin-prettier": "^5.2.6",
+		"eslint-plugin-react": "^7.37.5",
+		"postcss-import": "^16.1.0",
+		"postcss-preset-env": "^10.1.6",
+		"prettier": "^3.5.3",
+		"stylelint": "^16.18.0",
+		"stylelint-config-recommended": "^16.0.0",
+		"stylelint-order": "^7.0.0"
+	}
+}

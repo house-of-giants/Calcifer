@@ -2,7 +2,7 @@
 /**
  * Public class
  */
-class Anything_Calculator_Public
+class Calcifer_Public
 {
 
   /**
@@ -11,10 +11,10 @@ class Anything_Calculator_Public
   public function enqueue_styles()
   {
     wp_enqueue_style(
-      'anything-calculator-public',
-      ANYTHING_CALCULATOR_URL . 'public/css/public.css',
+      'calcifer-public',
+      CALCIFER_URL . 'public/css/public.css',
       array(),
-      ANYTHING_CALCULATOR_VERSION
+      CALCIFER_VERSION
     );
   }
 
@@ -24,17 +24,17 @@ class Anything_Calculator_Public
   public function enqueue_scripts()
   {
     wp_enqueue_script(
-      'anything-calculator-public',
-      ANYTHING_CALCULATOR_URL . 'public/js/public.js',
+      'calcifer-public',
+      CALCIFER_URL . 'public/js/public.js',
       array('jquery'),
-      ANYTHING_CALCULATOR_VERSION,
+      CALCIFER_VERSION,
       true
     );
 
     // Pass data to script
     wp_localize_script(
-      'anything-calculator-public',
-      'anythingCalculatorPublic',
+      'calcifer-public',
+      'calciferPublic',
       array(
         'ajaxUrl' => admin_url('admin-ajax.php'),
         'nonce' => wp_create_nonce('wp_rest'),
@@ -48,7 +48,7 @@ class Anything_Calculator_Public
    */
   public function register_rest_routes()
   {
-    register_rest_route('anything-calculator/v1', '/calculate/(?P<id>\d+)', array(
+    register_rest_route('calcifer/v1', '/calculate/(?P<id>\d+)', array(
       'methods' => 'POST',
       'callback' => array($this, 'calculate_formula'),
       'permission_callback' => function () {
@@ -66,7 +66,7 @@ class Anything_Calculator_Public
       ),
     ));
 
-    register_rest_route('anything-calculator/v1', '/formulas', array(
+    register_rest_route('calcifer/v1', '/formulas', array(
       'methods' => 'GET',
       'callback' => array($this, 'get_formulas'),
       'permission_callback' => function () {

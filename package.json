@@ -1,5 +1,5 @@
 {
-	"name": "anything-calculator",
+	"name": "calcifer",
 	"version": "1.0.0",
 	"description": "A flexible calculator plugin for WordPress",
 	"main": "build/index.js",

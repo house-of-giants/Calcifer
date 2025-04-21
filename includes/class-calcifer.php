@@ -2,7 +2,7 @@
 /**
  * The main plugin class
  */
-class Anything_Calculator
+class Calcifer
 {
 
   /**
@@ -22,13 +22,13 @@ class Anything_Calculator
   private function load_dependencies()
   {
     // Admin class
-    require_once ANYTHING_CALCULATOR_PATH . 'admin/class-anything-calculator-admin.php';
+    require_once CALCIFER_PATH . 'admin/class-calcifer-admin.php';
 
     // Public class
-    require_once ANYTHING_CALCULATOR_PATH . 'public/class-anything-calculator-public.php';
+    require_once CALCIFER_PATH . 'public/class-calcifer-public.php';
 
     // Formula handler class
-    require_once ANYTHING_CALCULATOR_PATH . 'includes/class-formula-handler.php';
+    require_once CALCIFER_PATH . 'includes/class-formula-handler.php';
   }
 
   /**
@@ -36,7 +36,7 @@ class Anything_Calculator
    */
   private function define_admin_hooks()
   {
-    $admin = new Anything_Calculator_Admin();
+    $admin = new Calcifer_Admin();
 
     // Admin menu
     add_action('admin_menu', array($admin, 'add_admin_menu'));
@@ -60,7 +60,7 @@ class Anything_Calculator
    */
   private function define_public_hooks()
   {
-    $public = new Anything_Calculator_Public();
+    $public = new Calcifer_Public();
 
     // Public scripts and styles
     add_action('wp_enqueue_scripts', array($public, 'enqueue_styles'));
@@ -94,16 +94,16 @@ class Anything_Calculator
 
     // Register and localize block script for passing formulas data
     wp_register_script(
-      'anything-calculator-block-editor',
-      ANYTHING_CALCULATOR_URL . 'build/index.js',
+      'calcifer-block-editor',
+      CALCIFER_URL . 'build/index.js',
       array('wp-blocks', 'wp-element', 'wp-block-editor', 'wp-components', 'wp-i18n', 'wp-data'),
-      ANYTHING_CALCULATOR_VERSION
+      CALCIFER_VERSION
     );
 
     // Pass formulas to block script
     wp_localize_script(
-      'anything-calculator-block-editor',
-      'anythingCalculatorData',
+      'calcifer-block-editor',
+      'calciferData',
       array(
         'formulas' => $formulas,
         'restUrl' => get_rest_url(),
@@ -112,13 +112,13 @@ class Anything_Calculator
     );
 
     // Make sure the script is enqueued
-    wp_enqueue_script('anything-calculator-block-editor');
+    wp_enqueue_script('calcifer-block-editor');
 
     // Register the block using block.json
     register_block_type(
-      ANYTHING_CALCULATOR_PATH . 'build/blocks/calculator',
+      CALCIFER_PATH . 'build/blocks/calculator',
       array(
-        'editor_script' => 'anything-calculator-block-editor',
+        'editor_script' => 'calcifer-block-editor',
         'render_callback' => array($this, 'render_calculator_block'),
       )
     );
@@ -137,7 +137,7 @@ class Anything_Calculator
 
     // If no formula is selected, return empty
     if (empty($formula_id)) {
-      return '<div class="anything-calculator-error">Please select a formula in the block settings.</div>';
+      return '<div class="calcifer-error">Please select a formula in the block settings.</div>';
     }
 
     // Get formula details
@@ -145,14 +145,14 @@ class Anything_Calculator
     $formula = $formula_handler->get_formula($formula_id);
 
     if (!$formula) {
-      return '<div class="anything-calculator-error">Selected formula not found.</div>';
+      return '<div class="calcifer-error">Selected formula not found.</div>';
     }
 
     // Start output buffer
     ob_start();
 
     // Include the template
-    include ANYTHING_CALCULATOR_PATH . 'public/templates/calculator.php';
+    include CALCIFER_PATH . 'public/templates/calculator.php';
 
     // Return the template content
     return ob_get_clean();
@@ -164,10 +164,10 @@ class Anything_Calculator
   public function run()
   {
     // Plugin activation hook
-    register_activation_hook(ANYTHING_CALCULATOR_PATH . 'anything-calculator.php', array($this, 'activate'));
+    register_activation_hook(CALCIFER_PATH . 'calcifer.php', array($this, 'activate'));
 
     // Plugin deactivation hook
-    register_deactivation_hook(ANYTHING_CALCULATOR_PATH . 'anything-calculator.php', array($this, 'deactivate'));
+    register_deactivation_hook(CALCIFER_PATH . 'calcifer.php', array($this, 'deactivate'));
   }
 
   /**

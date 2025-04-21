@@ -1,10 +1,10 @@
-# Anything Calculator
+# Calcifer
 
 A flexible WordPress calculator plugin that allows users to create custom formulas and display them as Gutenberg blocks.
 
 ## Description
 
-Anything Calculator is a versatile tool that enables website owners to create customized calculators with their own formulas. Whether you're calculating BMI, percentages, tip amounts, or any other mathematical formula, this plugin makes it easy to implement and display interactive calculators on your WordPress site.
+Calcifer is a versatile tool that enables website owners to create customized calculators with their own formulas. Whether you're calculating BMI, percentages, tip amounts, or any other mathematical formula, this plugin makes it easy to implement and display interactive calculators on your WordPress site.
 
 ### Features
 
@@ -18,9 +18,9 @@ Anything Calculator is a versatile tool that enables website owners to create cu
 
 ## Installation
 
-1. Upload the `anything-calculator` folder to the `/wp-content/plugins/` directory
+1. Upload the `calcifer` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Navigate to 'Anything Calculator' in the admin menu
+3. Navigate to 'Calcifer' in the admin menu
 4. Create your first formula
 5. Add the Calculator block to any post or page
 
@@ -28,7 +28,7 @@ Anything Calculator is a versatile tool that enables website owners to create cu
 
 ### Creating a Formula
 
-1. Go to Anything Calculator > Add New Formula
+1. Go to Calcifer > Add New Formula
 2. Enter a title and description for your formula
 3. Define the formula expression using variable names
 4. Add input fields and set their properties
@@ -39,7 +39,7 @@ Anything Calculator is a versatile tool that enables website owners to create cu
 
 1. Edit the page where you want to display the calculator
 2. Add a new block and search for "Calculator"
-3. Select the Anything Calculator block
+3. Select the Calcifer block
 4. Choose your formula from the block settings
 5. Customize the title, description, and theme
 6. Save the page

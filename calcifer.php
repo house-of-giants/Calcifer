@@ -1,12 +1,12 @@
 <?php
 /**
- * Plugin Name: Anything Calculator
+ * Plugin Name: Calcifer
  * Plugin URI: https://hlpipe.com
  * Description: A flexible calculator plugin that allows users to create custom formulas and display them as Gutenberg blocks.
  * Version: 1.0.0
  * Author: H&L Pipe
  * Author URI: https://hlpipe.com
- * Text Domain: anything-calculator
+ * Text Domain: calcifer
  * License: GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
@@ -17,17 +17,17 @@ if (!defined('WPINC')) {
 }
 
 // Define plugin constants
-define('ANYTHING_CALCULATOR_VERSION', '1.0.0');
-define('ANYTHING_CALCULATOR_PATH', plugin_dir_path(__FILE__));
-define('ANYTHING_CALCULATOR_URL', plugin_dir_url(__FILE__));
+define('CALCIFER_VERSION', '1.0.0');
+define('CALCIFER_PATH', plugin_dir_path(__FILE__));
+define('CALCIFER_URL', plugin_dir_url(__FILE__));
 
 // Include required files
-require_once ANYTHING_CALCULATOR_PATH . 'includes/class-anything-calculator.php';
+require_once CALCIFER_PATH . 'includes/class-calcifer.php';
 
 // Initialize the plugin
-function run_anything_calculator()
+function run_calcifer()
 {
-  $plugin = new Anything_Calculator();
+  $plugin = new Calcifer();
   $plugin->run();
 }
-run_anything_calculator();
+run_calcifer();

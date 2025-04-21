@@ -1,5 +1,5 @@
 /**
- * Admin JavaScript for Anything Calculator
+ * Admin JavaScript for Calcifer
  */
 (function ($) {
 	'use strict';
@@ -8,20 +8,20 @@
 	 * Handle formula inputs
 	 */
 	function setupFormulaInputs() {
-		const inputsContainer = $('#ac-inputs-container');
-		const template = $('#ac-input-template').html();
+		const inputsContainer = $('#calcifer-inputs-container');
+		const template = $('#calcifer-input-template').html();
 
 		console.log('Setting up formula inputs');
 		console.log('Inputs container found:', inputsContainer.length > 0);
 		console.log('Template found:', template !== undefined);
 
 		// Add new input
-		$('.ac-add-input').on('click', function (e) {
+		$('.calcifer-add-input').on('click', function (e) {
 			e.preventDefault();
 			console.log('Add input button clicked');
 
 			// Count existing inputs
-			const count = inputsContainer.find('.ac-input-item').length;
+			const count = inputsContainer.find('.calcifer-input-item').length;
 			const index = count;
 			console.log('Current input count:', count);
 
@@ -35,21 +35,21 @@
 		});
 
 		// Log if add input button exists
-		console.log('Add input button found:', $('.ac-add-input').length > 0);
+		console.log('Add input button found:', $('.calcifer-add-input').length > 0);
 
 		// Remove input
-		$(document).on('click', '.ac-remove-input', function () {
+		$(document).on('click', '.calcifer-remove-input', function () {
 			console.log('Remove input button clicked');
-			$(this).closest('.ac-input-item').remove();
+			$(this).closest('.calcifer-input-item').remove();
 
 			// Update indices
 			updateInputIndices();
 		});
 
 		// Add at least one input if there are none
-		if (inputsContainer.find('.ac-input-item').length === 0) {
+		if (inputsContainer.find('.calcifer-input-item').length === 0) {
 			console.log('No inputs found, adding one automatically');
-			$('.ac-add-input').trigger('click');
+			$('.calcifer-add-input').trigger('click');
 		}
 	}
 
@@ -57,7 +57,7 @@
 	 * Update input indices after removing an input
 	 */
 	function updateInputIndices() {
-		const inputs = $('.ac-input-item');
+		const inputs = $('.calcifer-input-item');
 
 		inputs.each(function (index) {
 			// Update index attribute
@@ -69,25 +69,30 @@
 				.first()
 				.text('Input #' + (index + 1) + ' ')
 				.append(
-					$('<span class="ac-remove-input dashicons dashicons-no-alt"></span>'),
+					$(
+						'<span class="calcifer-remove-input dashicons dashicons-no-alt"></span>',
+					),
 				);
 
 			// Update input IDs and names
 			$(this)
-				.find('[id^="ac_inputs_"]')
+				.find('[id^="calcifer_inputs_"]')
 				.each(function () {
 					const oldId = $(this).attr('id');
-					const newId = oldId.replace(/ac_inputs_\d+/, 'ac_inputs_' + index);
+					const newId = oldId.replace(
+						/calcifer_inputs_\d+/,
+						'calcifer_inputs_' + index,
+					);
 					$(this).attr('id', newId);
 				});
 
 			$(this)
-				.find('[name^="ac_inputs["]')
+				.find('[name^="calcifer_inputs["]')
 				.each(function () {
 					const oldName = $(this).attr('name');
 					const newName = oldName.replace(
-						/ac_inputs\[\d+\]/,
-						'ac_inputs[' + index + ']',
+						/calcifer_inputs\[\d+\]/,
+						'calcifer_inputs[' + index + ']',
 					);
 					$(this).attr('name', newName);
 				});
@@ -98,24 +103,24 @@
 	 * Handle formula preview
 	 */
 	function setupFormulaPreview() {
-		$('.ac-preview-formula').on('click', function (e) {
+		$('.calcifer-preview-formula').on('click', function (e) {
 			e.preventDefault();
 
 			const formulaId = $(this).data('formula-id');
-			const modal = $('#ac-formula-preview-modal');
-			const modalContent = modal.find('.ac-formula-preview-content');
+			const modal = $('#calcifer-formula-preview-modal');
+			const modalContent = modal.find('.calcifer-formula-preview-content');
 
 			// Show modal
 			modal.show();
 
 			// Load formula preview
 			$.ajax({
-				url: anythingCalculatorAdmin.ajaxUrl,
+				url: calciferAdmin.ajaxUrl,
 				type: 'POST',
 				data: {
-					action: 'ac_preview_formula',
+					action: 'calcifer_preview_formula',
 					formula_id: formulaId,
-					_wpnonce: anythingCalculatorAdmin.nonce,
+					_wpnonce: calciferAdmin.nonce,
 				},
 				success: function (response) {
 					if (response.success) {
@@ -137,7 +142,7 @@
 		});
 
 		// Close modal when clicking outside content
-		$('#ac-formula-preview-modal').on('click', function (e) {
+		$('#calcifer-formula-preview-modal').on('click', function (e) {
 			if ($(e.target).is(this)) {
 				$(this).hide();
 			}
@@ -145,19 +150,19 @@
 
 		// Add close button to modal
 		const closeButton = $(
-			'<span class="ac-formula-preview-close dashicons dashicons-no-alt"></span>',
+			'<span class="calcifer-formula-preview-close dashicons dashicons-no-alt"></span>',
 		);
-		$('.ac-formula-preview-container h2').append(closeButton);
+		$('.calcifer-formula-preview-container h2').append(closeButton);
 
 		// Close modal when clicking close button
-		$(document).on('click', '.ac-formula-preview-close', function () {
-			$('#ac-formula-preview-modal').hide();
+		$(document).on('click', '.calcifer-formula-preview-close', function () {
+			$('#calcifer-formula-preview-modal').hide();
 		});
 
 		// Close modal when pressing ESC
 		$(document).on('keydown', function (e) {
 			if (e.keyCode === 27) {
-				$('#ac-formula-preview-modal').hide();
+				$('#calcifer-formula-preview-modal').hide();
 			}
 		});
 	}

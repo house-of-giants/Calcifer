@@ -8,7 +8,7 @@ class Formula_Handler
   /**
    * Custom post type name
    */
-  private $post_type = 'ac_formula';
+  private $post_type = 'calcifer_formula';
 
   /**
    * Get all formulas
@@ -94,9 +94,9 @@ class Formula_Handler
     }
 
     // Save formula details
-    update_post_meta($post_id, '_ac_formula', $formula);
-    update_post_meta($post_id, '_ac_inputs', $sanitized_inputs);
-    update_post_meta($post_id, '_ac_output', $sanitized_output);
+    update_post_meta($post_id, '_calcifer_formula', $formula);
+    update_post_meta($post_id, '_calcifer_inputs', $sanitized_inputs);
+    update_post_meta($post_id, '_calcifer_output', $sanitized_output);
 
     return $post_id;
   }
@@ -131,9 +131,9 @@ class Formula_Handler
     }
 
     // Save formula details
-    update_post_meta($post_id, '_ac_formula', $formula);
-    update_post_meta($post_id, '_ac_inputs', $sanitized_inputs);
-    update_post_meta($post_id, '_ac_output', $sanitized_output);
+    update_post_meta($post_id, '_calcifer_formula', $formula);
+    update_post_meta($post_id, '_calcifer_inputs', $sanitized_inputs);
+    update_post_meta($post_id, '_calcifer_output', $sanitized_output);
 
     return $post_id;
   }
@@ -156,9 +156,9 @@ class Formula_Handler
       'title' => $post->post_title,
       'description' => $post->post_content,
       'slug' => $post->post_name,
-      'formula' => get_post_meta($post->ID, '_ac_formula', true),
-      'inputs' => get_post_meta($post->ID, '_ac_inputs', true),
-      'output' => get_post_meta($post->ID, '_ac_output', true),
+      'formula' => get_post_meta($post->ID, '_calcifer_formula', true),
+      'inputs' => get_post_meta($post->ID, '_calcifer_inputs', true),
+      'output' => get_post_meta($post->ID, '_calcifer_output', true),
     );
   }
 

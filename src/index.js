@@ -1,5 +1,5 @@
 /**
- * Anything Calculator Block Editor
+ * Calcifer Block Editor
  * Main entry point for the JavaScript bundle
  */
 

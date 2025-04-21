@@ -1,5 +1,5 @@
 /**
- * Anything Calculator Block
+ * Calcifer Block
  */
 
 import './style.scss';
@@ -37,19 +37,16 @@ registerBlockType(metadata.name, {
 		const [isLoading, setIsLoading] = useState(true);
 
 		useEffect(() => {
-			if (
-				window.anythingCalculatorData &&
-				window.anythingCalculatorData.formulas
-			) {
-				setFormulas(window.anythingCalculatorData.formulas);
+			if (window.calciferData && window.calciferData.formulas) {
+				setFormulas(window.calciferData.formulas);
 				setIsLoading(false);
 			} else {
 				// Fetch formulas from API if not available in localized data
 				fetch(
-					`${window.anythingCalculatorData?.restUrl || '/wp-json/'}anything-calculator/v1/formulas`,
+					`${window.calciferData?.restUrl || '/wp-json/'}calcifer/v1/formulas`,
 					{
 						headers: {
-							'X-WP-Nonce': window.anythingCalculatorData?.nonce || '',
+							'X-WP-Nonce': window.calciferData?.nonce || '',
 							'Content-Type': 'application/json',
 						},
 						credentials: 'same-origin',
@@ -82,7 +79,7 @@ registerBlockType(metadata.name, {
 
 		// Prepare formula options for select control
 		const formulaOptions = [
-			{ label: __('-- Select Formula --', 'anything-calculator'), value: 0 },
+			{ label: __('-- Select Formula --', 'calcifer'), value: 0 },
 			...(Array.isArray(formulas)
 				? formulas.map((formula) => ({
 						label: formula.title,
@@ -93,19 +90,19 @@ registerBlockType(metadata.name, {
 
 		// Theme options
 		const themeOptions = [
-			{ label: __('Light', 'anything-calculator'), value: 'light' },
-			{ label: __('Dark', 'anything-calculator'), value: 'dark' },
+			{ label: __('Light', 'calcifer'), value: 'light' },
+			{ label: __('Dark', 'calcifer'), value: 'dark' },
 		];
 
 		return (
 			<>
 				<InspectorControls>
 					<PanelBody
-						title={__('Calculator Settings', 'anything-calculator')}
+						title={__('Calculator Settings', 'calcifer')}
 						initialOpen={true}
 					>
 						<SelectControl
-							label={__('Formula', 'anything-calculator')}
+							label={__('Formula', 'calcifer')}
 							value={formulaId}
 							options={formulaOptions}
 							onChange={(value) =>
@@ -113,38 +110,32 @@ registerBlockType(metadata.name, {
 							}
 							help={__(
 								'Select the formula to use for calculation.',
-								'anything-calculator',
+								'calcifer',
 							)}
 						/>
 
 						<TextControl
-							label={__('Title', 'anything-calculator')}
+							label={__('Title', 'calcifer')}
 							value={title}
 							onChange={(value) => setAttributes({ title: value })}
-							help={__(
-								'Title displayed above the calculator.',
-								'anything-calculator',
-							)}
+							help={__('Title displayed above the calculator.', 'calcifer')}
 						/>
 
 						<TextareaControl
-							label={__('Description', 'anything-calculator')}
+							label={__('Description', 'calcifer')}
 							value={description}
 							onChange={(value) => setAttributes({ description: value })}
-							help={__(
-								'Description displayed below the title.',
-								'anything-calculator',
-							)}
+							help={__('Description displayed below the title.', 'calcifer')}
 						/>
 
 						<RadioControl
-							label={__('Theme', 'anything-calculator')}
+							label={__('Theme', 'calcifer')}
 							selected={theme}
 							options={themeOptions}
 							onChange={(value) => setAttributes({ theme: value })}
 							help={__(
 								'Choose the visual style for the calculator.',
-								'anything-calculator',
+								'calcifer',
 							)}
 						/>
 					</PanelBody>
@@ -152,27 +143,24 @@ registerBlockType(metadata.name, {
 
 				<div {...blockProps}>
 					{isLoading ? (
-						<Placeholder
-							icon="calculator"
-							label={__('Calculator', 'anything-calculator')}
-						>
+						<Placeholder icon="calculator" label={__('Calculator', 'calcifer')}>
 							<Spinner />
-							{__('Loading formulas...', 'anything-calculator')}
+							{__('Loading formulas...', 'calcifer')}
 						</Placeholder>
 					) : formulaId > 0 ? (
-						<div className={`anything-calculator-preview theme-${theme}`}>
+						<div className={`calcifer-preview theme-${theme}`}>
 							<Card>
 								<CardHeader>
-									<h3>{title || __('Calculator', 'anything-calculator')}</h3>
+									<h3>{title || __('Calculator', 'calcifer')}</h3>
 									{description && <p>{description}</p>}
 								</CardHeader>
 								<CardBody>
 									{Array.isArray(formulas) && (
-										<div className="anything-calculator-editor-preview">
+										<div className="calcifer-editor-preview">
 											<p className="preview-note">
 												{__(
 													'Calculator Preview - The actual calculator will appear here on the frontend.',
-													'anything-calculator',
+													'calcifer',
 												)}
 											</p>
 											<hr />
@@ -181,15 +169,15 @@ registerBlockType(metadata.name, {
 													return (
 														<div key={formula.id} className="selected-formula">
 															<h4>
-																{__('Selected Formula:', 'anything-calculator')}{' '}
+																{__('Selected Formula:', 'calcifer')}{' '}
 																{formula.title}
 															</h4>
 															<p>
-																{__('Inputs:', 'anything-calculator')}{' '}
+																{__('Inputs:', 'calcifer')}{' '}
 																{formula.inputs?.length || 0}
 															</p>
 															<p>
-																{__('Output:', 'anything-calculator')}{' '}
+																{__('Output:', 'calcifer')}{' '}
 																{formula.output?.label}
 															</p>
 														</div>
@@ -205,10 +193,10 @@ registerBlockType(metadata.name, {
 					) : (
 						<Placeholder
 							icon="calculator"
-							label={__('Calculator', 'anything-calculator')}
+							label={__('Calculator', 'calcifer')}
 							instructions={__(
 								'Select a formula in the block settings sidebar.',
-								'anything-calculator',
+								'calcifer',
 							)}
 						>
 							<SelectControl

@@ -2,7 +2,7 @@
 /**
  * Admin class
  */
-class Anything_Calculator_Admin
+class Calcifer_Admin
 {
 
   /**
@@ -12,17 +12,17 @@ class Anything_Calculator_Admin
   {
     // Load on our plugin pages and when editing formulas
     if (
-      strpos($hook, 'anything-calculator') === false &&
-      !(get_current_screen() && get_current_screen()->post_type === 'ac_formula')
+      strpos($hook, 'calcifer') === false &&
+      !(get_current_screen() && get_current_screen()->post_type === 'calcifer_formula')
     ) {
       return;
     }
 
     wp_enqueue_style(
-      'anything-calculator-admin',
-      ANYTHING_CALCULATOR_URL . 'admin/css/admin.css',
+      'calcifer-admin',
+      CALCIFER_URL . 'admin/css/admin.css',
       array(),
-      ANYTHING_CALCULATOR_VERSION
+      CALCIFER_VERSION
     );
   }
 
@@ -33,24 +33,24 @@ class Anything_Calculator_Admin
   {
     // Load on our plugin pages and when editing formulas
     if (
-      strpos($hook, 'anything-calculator') === false &&
-      !(get_current_screen() && get_current_screen()->post_type === 'ac_formula')
+      strpos($hook, 'calcifer') === false &&
+      !(get_current_screen() && get_current_screen()->post_type === 'calcifer_formula')
     ) {
       return;
     }
 
     wp_enqueue_script(
-      'anything-calculator-admin',
-      ANYTHING_CALCULATOR_URL . 'admin/js/admin.js',
+      'calcifer-admin',
+      CALCIFER_URL . 'admin/js/admin.js',
       array('jquery', 'jquery-ui-sortable'),
-      ANYTHING_CALCULATOR_VERSION,
+      CALCIFER_VERSION,
       true
     );
 
     // Pass data to script
     wp_localize_script(
-      'anything-calculator-admin',
-      'anythingCalculatorAdmin',
+      'calcifer-admin',
+      'calciferAdmin',
       array(
         'ajaxUrl' => admin_url('admin-ajax.php'),
         'nonce' => wp_create_nonce('wp_rest'),
@@ -65,39 +65,39 @@ class Anything_Calculator_Admin
   public function add_admin_menu()
   {
     add_menu_page(
-      'Anything Calculator',
-      'Anything Calculator',
+      'Calcifer',
+      'Calcifer',
       'manage_options',
-      'anything-calculator',
+      'calcifer',
       array($this, 'display_admin_page'),
       'dashicons-calculator',
       30
     );
 
     add_submenu_page(
-      'anything-calculator',
+      'calcifer',
       'Formulas',
       'Formulas',
       'manage_options',
-      'edit.php?post_type=ac_formula',
+      'edit.php?post_type=calcifer_formula',
       null
     );
 
     add_submenu_page(
-      'anything-calculator',
+      'calcifer',
       'Add New Formula',
       'Add New Formula',
       'manage_options',
-      'post-new.php?post_type=ac_formula',
+      'post-new.php?post_type=calcifer_formula',
       null
     );
 
     add_submenu_page(
-      'anything-calculator',
+      'calcifer',
       'Settings',
       'Settings',
       'manage_options',
-      'anything-calculator-settings',
+      'calcifer-settings',
       array($this, 'display_settings_page')
     );
   }
@@ -107,7 +107,7 @@ class Anything_Calculator_Admin
    */
   public function display_admin_page()
   {
-    include ANYTHING_CALCULATOR_PATH . 'admin/partials/admin-page.php';
+    include CALCIFER_PATH . 'admin/partials/admin-page.php';
   }
 
   /**
@@ -115,7 +115,7 @@ class Anything_Calculator_Admin
    */
   public function display_settings_page()
   {
-    include ANYTHING_CALCULATOR_PATH . 'admin/partials/settings-page.php';
+    include CALCIFER_PATH . 'admin/partials/settings-page.php';
   }
 
   /**
@@ -154,7 +154,7 @@ class Anything_Calculator_Admin
       'supports' => array('title', 'editor'),
     );
 
-    register_post_type('ac_formula', $args);
+    register_post_type('calcifer_formula', $args);
   }
 
   /**
@@ -163,28 +163,28 @@ class Anything_Calculator_Admin
   public function add_formula_meta_boxes()
   {
     add_meta_box(
-      'ac_formula_details',
+      'calcifer_formula_details',
       'Formula Details',
       array($this, 'render_formula_details_meta_box'),
-      'ac_formula',
+      'calcifer_formula',
       'normal',
       'high'
     );
 
     add_meta_box(
-      'ac_formula_inputs',
+      'calcifer_formula_inputs',
       'Formula Inputs',
       array($this, 'render_formula_inputs_meta_box'),
-      'ac_formula',
+      'calcifer_formula',
       'normal',
       'high'
     );
 
     add_meta_box(
-      'ac_formula_output',
+      'calcifer_formula_output',
       'Formula Output',
       array($this, 'render_formula_output_meta_box'),
-      'ac_formula',
+      'calcifer_formula',
       'normal',
       'high'
     );
@@ -196,13 +196,13 @@ class Anything_Calculator_Admin
   public function render_formula_details_meta_box($post)
   {
     // Get formula
-    $formula = get_post_meta($post->ID, '_ac_formula', true);
+    $formula = get_post_meta($post->ID, '_calcifer_formula', true);
 
     // Add nonce for security
-    wp_nonce_field('ac_formula_details', 'ac_formula_details_nonce');
+    wp_nonce_field('calcifer_formula_details', 'calcifer_formula_details_nonce');
 
     // Include template
-    include ANYTHING_CALCULATOR_PATH . 'admin/partials/meta-boxes/formula-details.php';
+    include CALCIFER_PATH . 'admin/partials/meta-boxes/formula-details.php';
   }
 
   /**
@@ -211,7 +211,7 @@ class Anything_Calculator_Admin
   public function render_formula_inputs_meta_box($post)
   {
     // Get inputs
-    $inputs = get_post_meta($post->ID, '_ac_inputs', true);
+    $inputs = get_post_meta($post->ID, '_calcifer_inputs', true);
 
     // Ensure inputs is an array
     if (!is_array($inputs)) {
@@ -219,10 +219,10 @@ class Anything_Calculator_Admin
     }
 
     // Add nonce for security
-    wp_nonce_field('ac_formula_inputs', 'ac_formula_inputs_nonce');
+    wp_nonce_field('calcifer_formula_inputs', 'calcifer_formula_inputs_nonce');
 
     // Include template
-    include ANYTHING_CALCULATOR_PATH . 'admin/partials/meta-boxes/formula-inputs.php';
+    include CALCIFER_PATH . 'admin/partials/meta-boxes/formula-inputs.php';
   }
 
   /**
@@ -231,7 +231,7 @@ class Anything_Calculator_Admin
   public function render_formula_output_meta_box($post)
   {
     // Get output
-    $output = get_post_meta($post->ID, '_ac_output', true);
+    $output = get_post_meta($post->ID, '_calcifer_output', true);
 
     // Ensure output is an array
     if (!is_array($output)) {
@@ -243,10 +243,10 @@ class Anything_Calculator_Admin
     }
 
     // Add nonce for security
-    wp_nonce_field('ac_formula_output', 'ac_formula_output_nonce');
+    wp_nonce_field('calcifer_formula_output', 'calcifer_formula_output_nonce');
 
     // Include template
-    include ANYTHING_CALCULATOR_PATH . 'admin/partials/meta-boxes/formula-output.php';
+    include CALCIFER_PATH . 'admin/partials/meta-boxes/formula-output.php';
   }
 
   /**
@@ -260,7 +260,7 @@ class Anything_Calculator_Admin
     }
 
     // Check the post type
-    if (get_post_type($post_id) !== 'ac_formula') {
+    if (get_post_type($post_id) !== 'calcifer_formula') {
       return;
     }
 
@@ -271,35 +271,35 @@ class Anything_Calculator_Admin
 
     // Save formula details - with improved nonce and sanitization
     if (
-      isset($_POST['ac_formula_details_nonce']) &&
-      wp_verify_nonce(sanitize_text_field($_POST['ac_formula_details_nonce']), 'ac_formula_details')
+      isset($_POST['calcifer_formula_details_nonce']) &&
+      wp_verify_nonce(sanitize_text_field($_POST['calcifer_formula_details_nonce']), 'calcifer_formula_details')
     ) {
-      $formula = isset($_POST['ac_formula']) ? $this->sanitize_formula($_POST['ac_formula']) : '';
+      $formula = isset($_POST['calcifer_formula']) ? $this->sanitize_formula($_POST['calcifer_formula']) : '';
       if (!empty($formula)) {
-        update_post_meta($post_id, '_ac_formula', $formula);
+        update_post_meta($post_id, '_calcifer_formula', $formula);
       }
     }
 
     // Save formula inputs
     if (
-      isset($_POST['ac_formula_inputs_nonce']) &&
-      wp_verify_nonce(sanitize_text_field($_POST['ac_formula_inputs_nonce']), 'ac_formula_inputs')
+      isset($_POST['calcifer_formula_inputs_nonce']) &&
+      wp_verify_nonce(sanitize_text_field($_POST['calcifer_formula_inputs_nonce']), 'calcifer_formula_inputs')
     ) {
-      $inputs = isset($_POST['ac_inputs']) ? $this->sanitize_inputs($_POST['ac_inputs']) : array();
-      update_post_meta($post_id, '_ac_inputs', $inputs);
+      $inputs = isset($_POST['calcifer_inputs']) ? $this->sanitize_inputs($_POST['calcifer_inputs']) : array();
+      update_post_meta($post_id, '_calcifer_inputs', $inputs);
     }
 
     // Save formula output
     if (
-      isset($_POST['ac_formula_output_nonce']) &&
-      wp_verify_nonce(sanitize_text_field($_POST['ac_formula_output_nonce']), 'ac_formula_output')
+      isset($_POST['calcifer_formula_output_nonce']) &&
+      wp_verify_nonce(sanitize_text_field($_POST['calcifer_formula_output_nonce']), 'calcifer_formula_output')
     ) {
       $output = array(
-        'label' => isset($_POST['ac_output_label']) ? sanitize_text_field($_POST['ac_output_label']) : 'Result',
-        'unit' => isset($_POST['ac_output_unit']) ? sanitize_text_field($_POST['ac_output_unit']) : '',
-        'precision' => isset($_POST['ac_output_precision']) ? absint($_POST['ac_output_precision']) : 2,
+        'label' => isset($_POST['calcifer_output_label']) ? sanitize_text_field($_POST['calcifer_output_label']) : 'Result',
+        'unit' => isset($_POST['calcifer_output_unit']) ? sanitize_text_field($_POST['calcifer_output_unit']) : '',
+        'precision' => isset($_POST['calcifer_output_precision']) ? absint($_POST['calcifer_output_precision']) : 2,
       );
-      update_post_meta($post_id, '_ac_output', $output);
+      update_post_meta($post_id, '_calcifer_output', $output);
     }
   }
 
@@ -364,7 +364,7 @@ class Anything_Calculator_Admin
   public function __construct()
   {
     // Register AJAX actions
-    add_action('wp_ajax_ac_dismiss_getting_started', array($this, 'dismiss_getting_started'));
+    add_action('wp_ajax_calcifer_dismiss_getting_started', array($this, 'dismiss_getting_started'));
   }
 
   /**
@@ -373,14 +373,14 @@ class Anything_Calculator_Admin
   public function dismiss_getting_started()
   {
     // Verify nonce
-    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'ac_dismiss_getting_started')) {
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'calcifer_dismiss_getting_started')) {
       wp_send_json_error('Invalid nonce');
       return;
     }
 
     // Store user preference
     $user_id = get_current_user_id();
-    update_user_meta($user_id, 'ac_getting_started_dismissed', '1');
+    update_user_meta($user_id, 'calcifer_getting_started_dismissed', '1');
 
     wp_send_json_success();
     exit;

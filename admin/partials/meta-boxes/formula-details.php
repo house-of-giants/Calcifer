@@ -5,15 +5,15 @@
  * @var string $formula The formula expression
  */
 ?>
-<div class="ac-formula-details">
+<div class="calcifer-formula-details">
   <p>
-    <label for="ac_formula">Formula Expression:</label>
-    <input type="text" id="ac_formula" name="ac_formula" value="<?php echo esc_attr($formula); ?>" class="large-text"
-      required placeholder="Example: Weight / (Height * Height)">
+    <label for="calcifer_formula">Formula Expression:</label>
+    <input type="text" id="calcifer_formula" name="calcifer_formula" value="<?php echo esc_attr($formula); ?>"
+      class="large-text" required placeholder="Example: Weight / (Height * Height)">
     <span class="formula-validation-message"></span>
   </p>
 
-  <div class="ac-formula-help">
+  <div class="calcifer-formula-help">
     <p class="description">
       Enter the mathematical formula using variable names that will be defined as inputs below.
       <a href="#" class="formula-help-toggle">Show Formula Help</a>
@@ -23,7 +23,8 @@
       style="display: none; background: #f9f9f9; padding: 10px; border-left: 4px solid #0073aa; margin-top: 10px;">
       <h4>Formula Syntax Guide</h4>
       <p><strong>Variable Names:</strong> Use simple names without spaces (e.g., <code>Weight</code>,
-        <code>Height</code>, <code>Price</code>)</p>
+        <code>Height</code>, <code>Price</code>)
+      </p>
       <p><strong>Supported Operations:</strong></p>
       <ul style="list-style-type: disc; margin-left: 20px;">
         <li><code>+</code> Addition (e.g., <code>Value1 + Value2</code>)</li>
@@ -61,7 +62,7 @@
     });
 
     // Basic formula validation
-    $('#ac_formula').on('input', function () {
+    $('#calcifer_formula').on('input', function () {
       const formula = $(this).val();
       const validationMsg = $('.formula-validation-message');
 

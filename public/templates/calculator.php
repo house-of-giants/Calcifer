@@ -8,70 +8,70 @@
  * @var string $theme The calculator theme
  */
 ?>
-<div class="anything-calculator-container <?php echo esc_attr("theme-{$theme}"); ?>" data-formula-id="<?php echo esc_attr($formula['id']); ?>">
-    <div class="anything-calculator-header">
-        <h3 class="anything-calculator-title"><?php echo esc_html($title); ?></h3>
-        <?php if (!empty($description)) : ?>
-            <div class="anything-calculator-description"><?php echo wp_kses_post($description); ?></div>
+<div class="calcifer-container <?php echo esc_attr("theme-{$theme}"); ?>" data-formula-id="<?php echo esc_attr($formula['id']); ?>">
+    <div class="calcifer-header">
+        <h3 class="calcifer-title"><?php echo esc_html($title); ?></h3>
+        <?php if (!empty($description)): ?>
+              <div class="calcifer-description"><?php echo wp_kses_post($description); ?></div>
         <?php endif; ?>
     </div>
 
-    <div class="anything-calculator-body">
-        <form class="anything-calculator-form" id="calculator-form-<?php echo esc_attr($formula['id']); ?>">
-            <?php if (!empty($formula['inputs'])) : ?>
-                <div class="anything-calculator-inputs">
-                    <?php foreach ($formula['inputs'] as $input) : ?>
-                        <div class="anything-calculator-input-group">
-                            <label for="<?php echo esc_attr("input-{$formula['id']}-{$input['name']}"); ?>" class="anything-calculator-label">
-                                <?php echo esc_html($input['label']); ?>
-                                <?php if (!empty($input['required'])) : ?>
-                                    <span class="required">*</span>
+    <div class="calcifer-body">
+        <form class="calcifer-form" id="calculator-form-<?php echo esc_attr($formula['id']); ?>">
+            <?php if (!empty($formula['inputs'])): ?>
+                  <div class="calcifer-inputs">
+                      <?php foreach ($formula['inputs'] as $input): ?>
+                            <div class="calcifer-input-group">
+                                <label for="<?php echo esc_attr("input-{$formula['id']}-{$input['name']}"); ?>" class="calcifer-label">
+                                    <?php echo esc_html($input['label']); ?>
+                                    <?php if (!empty($input['required'])): ?>
+                                          <span class="required">*</span>
+                                    <?php endif; ?>
+                                </label>
+                            
+                                <?php if (!empty($input['description'])): ?>
+                                      <div class="calcifer-input-description"><?php echo esc_html($input['description']); ?></div>
                                 <?php endif; ?>
-                            </label>
                             
-                            <?php if (!empty($input['description'])) : ?>
-                                <div class="anything-calculator-input-description"><?php echo esc_html($input['description']); ?></div>
-                            <?php endif; ?>
-                            
-                            <input 
-                                type="<?php echo esc_attr($input['type']); ?>"
-                                id="<?php echo esc_attr("input-{$formula['id']}-{$input['name']}"); ?>"
-                                name="<?php echo esc_attr($input['name']); ?>"
-                                class="anything-calculator-input"
-                                value="<?php echo esc_attr($input['default']); ?>"
-                                <?php echo (!empty($input['required'])) ? 'required' : ''; ?>
-                                step="any"
-                            >
-                        </div>
-                    <?php endforeach; ?>
-                </div>
+                                <input 
+                                    type="<?php echo esc_attr($input['type']); ?>"
+                                    id="<?php echo esc_attr("input-{$formula['id']}-{$input['name']}"); ?>"
+                                    name="<?php echo esc_attr($input['name']); ?>"
+                                    class="calcifer-input"
+                                    value="<?php echo esc_attr($input['default']); ?>"
+                                    <?php echo (!empty($input['required'])) ? 'required' : ''; ?>
+                                    step="any"
+                                >
+                            </div>
+                      <?php endforeach; ?>
+                  </div>
             <?php endif; ?>
 
-            <div class="anything-calculator-actions">
-                <button type="submit" class="anything-calculator-button calculate-button">Calculate</button>
-                <button type="reset" class="anything-calculator-button reset-button">Reset</button>
+            <div class="calcifer-actions">
+                <button type="submit" class="calcifer-button calculate-button">Calculate</button>
+                <button type="reset" class="calcifer-button reset-button">Reset</button>
             </div>
         </form>
 
-        <div class="anything-calculator-result" id="calculator-result-<?php echo esc_attr($formula['id']); ?>" style="display: none;">
-            <div class="anything-calculator-result-inner">
-                <div class="anything-calculator-result-label"><?php echo esc_html($formula['output']['label']); ?>:</div>
-                <div class="anything-calculator-result-value">
+        <div class="calcifer-result" id="calculator-result-<?php echo esc_attr($formula['id']); ?>" style="display: none;">
+            <div class="calcifer-result-inner">
+                <div class="calcifer-result-label"><?php echo esc_html($formula['output']['label']); ?>:</div>
+                <div class="calcifer-result-value">
                     <span class="result-number"></span>
-                    <?php if (!empty($formula['output']['unit'])) : ?>
-                        <span class="result-unit"><?php echo esc_html($formula['output']['unit']); ?></span>
+                    <?php if (!empty($formula['output']['unit'])): ?>
+                          <span class="result-unit"><?php echo esc_html($formula['output']['unit']); ?></span>
                     <?php endif; ?>
                 </div>
             </div>
         </div>
 
-        <div class="anything-calculator-error" id="calculator-error-<?php echo esc_attr($formula['id']); ?>" style="display: none;"></div>
+        <div class="calcifer-error" id="calculator-error-<?php echo esc_attr($formula['id']); ?>" style="display: none;"></div>
     </div>
 
-    <div class="anything-calculator-footer">
-        <div class="anything-calculator-branding">
+    <div class="calcifer-footer">
+        <div class="calcifer-branding">
             <span>Powered by</span>
-            <a href="https://houseofgiants.com" target="_blank" rel="noopener noreferrer">Anything Calculator</a>
+            <a href="https://houseofgiants.com" target="_blank" rel="noopener noreferrer">Calcifer</a>
         </div>
     </div>
 </div>
@@ -103,11 +103,11 @@
             });
             
             // Calculate formula with modern fetch API
-            fetch(anythingCalculatorPublic.restUrl + 'anything-calculator/v1/calculate/' + formulaId, {
+            fetch(calciferPublic.restUrl + 'calcifer/v1/calculate/' + formulaId, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-WP-Nonce': anythingCalculatorPublic.nonce
+                    'X-WP-Nonce': calciferPublic.nonce
                 },
                 credentials: 'same-origin',
                 body: JSON.stringify(inputValues)

@@ -1,12 +1,12 @@
 /**
- * Public JavaScript for Anything Calculator
+ * Public JavaScript for Calcifer
  */
 (function($) {
   'use strict';
   
   // Initialize all calculators on the page
   function initCalculators() {
-    $('.anything-calculator-container').each(function() {
+    $('.calcifer-container').each(function() {
       initCalculator($(this));
     });
   }
@@ -14,9 +14,9 @@
   // Initialize single calculator
   function initCalculator(container) {
     const formulaId = container.data('formula-id');
-    const form = container.find('.anything-calculator-form');
-    const result = container.find('.anything-calculator-result');
-    const error = container.find('.anything-calculator-error');
+    const form = container.find('.calcifer-form');
+    const result = container.find('.calcifer-result');
+    const error = container.find('.calcifer-error');
     
     // Submit form
     form.on('submit', function(e) {
@@ -69,11 +69,11 @@
     resultContainer.slideDown();
     
     // Modern fetch API request
-    fetch(anythingCalculatorPublic.restUrl + 'anything-calculator/v1/calculate/' + formulaId, {
+    fetch(calciferPublic.restUrl + 'calcifer/v1/calculate/' + formulaId, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-WP-Nonce': anythingCalculatorPublic.nonce
+        'X-WP-Nonce': calciferPublic.nonce
       },
       credentials: 'same-origin',
       body: JSON.stringify(inputValues)

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<ruleset name="Calcifer Coding Standards">
+    <description>Coding standards for Calcifer WordPress plugin.</description>
+
+    <!-- Scan all PHP files -->
+    <file>.</file>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/build/*</exclude-pattern>
+
+    <!-- Use WordPress standards as a base -->
+    <rule ref="WordPress">
+        <!-- Exclude the space indentation rule as we use tabs -->
+        <exclude name="Generic.WhiteSpace.DisallowTabIndent"/>
+    </rule>
+    
+    <!-- Enforce tabs for indentation -->
+    <rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
+    <rule ref="Generic.WhiteSpace.ScopeIndent">
+        <properties>
+            <property name="indent" value="1"/>
+            <property name="tabIndent" value="true"/>
+        </properties>
+    </rule>
+    
+    <!-- Verify line endings are LF -->
+    <rule ref="Generic.Files.LineEndings">
+        <properties>
+            <property name="eolChar" value="\n"/>
+        </properties>
+    </rule>
+</ruleset> 
